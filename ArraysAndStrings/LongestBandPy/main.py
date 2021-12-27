@@ -14,28 +14,23 @@ def longest_band(arr):
 
 
 def longest_band_sets(arr):
-    items = set(arr)
-    already_checked = set()
+    elements = set(arr)
     longest_band_len = 0
     current_band_len = 1
 
-    i = 0
-    while i < len(arr):
-        current_number = arr[i]
-        next_number = current_number + 1
+    for i in range(len(arr)):
+        prev_element = arr[i] - 1
+        next_element = arr[i] + 1
 
-        if current_number in already_checked:
-            i += 1
+        if prev_element in elements:
             continue
 
-        while next_number in items:
-            already_checked.add(next_number)
+        while next_element in elements:
             current_band_len += 1
-            next_number += 1
+            next_element += 1
 
         longest_band_len = max(longest_band_len, current_band_len)
         current_band_len = 1
-        i += 1
 
     return longest_band_len
 

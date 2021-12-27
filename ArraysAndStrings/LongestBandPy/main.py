@@ -16,21 +16,19 @@ def longest_band(arr):
 def longest_band_sets(arr):
     elements = set(arr)
     longest_band_len = 0
-    current_band_len = 1
 
     for i in range(len(arr)):
         prev_element = arr[i] - 1
-        next_element = arr[i] + 1
 
-        if prev_element in elements:
-            continue
+        if prev_element not in elements:
+            current_band_len = 1
+            next_element = arr[i] + 1
 
-        while next_element in elements:
-            current_band_len += 1
-            next_element += 1
+            while next_element in elements:
+                current_band_len += 1
+                next_element += 1
 
-        longest_band_len = max(longest_band_len, current_band_len)
-        current_band_len = 1
+            longest_band_len = max(longest_band_len, current_band_len)
 
     return longest_band_len
 
